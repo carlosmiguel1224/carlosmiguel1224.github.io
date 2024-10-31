@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoorDash Calculator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">DoorDash Calculator</h1>
+        <form onsubmit="updatevar(event);">
+            <div class="form-group">
+                <label for="miles">Total Miles for the Trip</label>
+                <input id="miles" type="number" class="form-control" placeholder="Type total miles for the trip" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="moneyearned">Total $ Earned (Including Tip)</label>
+                <input id="moneyearned" type="number" class="form-control" placeholder="Type total $ earned including tip" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="mpg">MPG</label>
+                <input id="mpg" type="number" class="form-control" placeholder="Input MPG" min="0" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+        <p class="result text-center" id="result"><span id="submittedValue"></span></p>
+    </div>
+
+    <script>
+        let totalMiles = 0;
+        let totalEarned = 0;
+        let mpg = 0;
+        const gasCost = 3;
+
+        function updatevar(event) {
+            event.preventDefault(); 
+            totalMiles = document.getElementById('miles').value;
+            totalEarned = document.getElementById('moneyearned').value;
+            mpg = document.getElementById('mpg').value;
+
+            let calc = ((totalEarned * 40) / totalMiles) - (120 / mpg);
+            calc = calc.toFixed(2);
+            console.log(calc);
+            const result = `This is your true hourly rate: $${calc}`;
+            document.getElementById('submittedValue').textContent = result;
+        }
+    </script>
+</body>
+</html>
